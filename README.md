@@ -5,7 +5,7 @@
 자세한 내용은 각 파트를 참고하십시오.
 
 |1. [About](#about)<br>2. [How](#how)<br>3. [FAQ](#faq)<br>4. [License](#license)<br>5. [Contact](#contact)|
-|---|
+|:---|
 
 # About
 본 프로젝트는 암호가 걸린 압축파일에 무차별 대입 공격(브루트 포스)를 시도하여 비밀번호를 찾아내는 프로그램입니다.<br>
