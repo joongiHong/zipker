@@ -106,9 +106,8 @@ user_max_string = int(input(
 # 무차별 대입 시도 파트
 
 os.system('cls')
-print("\n        ===================================\n\n[!] 지금부터", zname,
-      "에 대한 무차별 대입 공격을 진행하겠습니다.\n[!] 오랫동안 찾지 못할 경우 해결이 불가능한 경우이므로 종료하십시오.\n\n        ===================================")
-time.sleep(1)
+print("\n        ===================================\n\n[!]", zname,
+      "에 대한 무차별 대입 공격을 진행하고 있습니다.\n[!] 오랫동안 찾지 못할 경우 해결이 불가능한 경우이므로 종료하십시오.\n\n        ===================================")
 
 password_decrypt = 0  # 암호 변수
 decrypt_success = 0  # 성공 여부 변수
@@ -119,9 +118,6 @@ for user_count in range(user_min_string, user_max_string+1):
         password_decrypt = ''.join(password_decrypt_exam2)
         try:
             zip_decrypt(str(password_decrypt))
-            os.system('cls')
-            print("\n        ===================================\n\n[*] 지금", zname,
-                  "에 대한 무차별 대입 공격을 진행중입니다...\n[*] 암호의 길이에 따라 많은 시간이 소요될 수 있습니다...\n\n지금 대입중인 문자열 :", password_decrypt_exam, "\n\n        ===================================")
             decrypt_success = 1
             break
         except:
