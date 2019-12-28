@@ -1,10 +1,13 @@
 ![head](https://user-images.githubusercontent.com/23215270/70505338-14a48b80-1b6b-11ea-93ed-893ebb52e62a.png)
 
+[한국어](https://github.com/joongiHong/zipker/blob/master/README.md) | [English](https://github.com/joongiHong/zipker/blob/master/README.en.md)
+ | [中文](https://github.com/joongiHong/zipker/blob/master/README.zh.md) | [日本語](https://github.com/joongiHong/zipker/blob/master/README.ja.md)
+<br/><br/>
 암호가 걸린 압축파일에 무차별 대입 공격을 시도하여 비밀번호를 찾아내는 프로그램입니다.<br>
 본 프로젝트는 파이썬으로 작성되었으며 라이선스는 MIT 라이선스 입니다.<br>
 자세한 내용은 각 파트를 참고하십시오.
 
-|1. [About](#about)<br>2. [Module](#module)<br>3. [FAQ](#faq)<br>4. [License](https://github.com/joongiHong/zipker/blob/master/LICENSE)<br>5. [Contact](#contact)|
+|1. [About](#about)<br>2. [Module](#module)<br>3. [License](https://github.com/joongiHong/zipker/blob/master/LICENSE)<br>4. [Contact](#contact)|
 |:---|
 
 # About
@@ -40,13 +43,6 @@ num에 대입된 번호에 따라 해당되는 문자열을 리스트로서 반�
 
 ## zip_decrypt(filename, string, min, max)
 본 함수는 filename의 zip에 string을 무차별 대입하여 비밀번호를 찾아내는 함수입니다. min의 경우에는 비밀번호의 최소 길이, max의 경우에는 비밀번호의 최대 길이를 의미합니다. 비밀번호를 찾아낼 경우에는 찾아낸 비밀번호를 반환하며 찾아내지 못할 경우 False를 반환합니다.
-
-# FAQ
-### Q. Zipker.py가 실행되지 않습니다.
-**2번 문단 How** 2, 3 지침에 따라 진행하였음에도 ''python'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는 배치 파일이 아닙니다.' 라고 표시되며 실행되지 않을 경우에는 python이 설치가 되지 않았거나 python이 환경변수에 등록되지 않을 것입니다. 자세한 것은 구글에 검색하세요.
-
-### Q. 파일을 찾지 못하였다고 합니다. (F-1 에러)
-프로그램의 질의에 따라 압축 파일 이름을 입력하였음에도 찾지 못하였다며 F-1 에러를 발생시키는 경우에는 두가지 이유가 있습니다. 첫번째 이유는 입력시 철자가 틀렸거나 마지막에 .zip 등의 확장자를 입력하지 않은 것입니다. 두번째 이유는 Zipker.py 파일과 해당 압축파일이 동일 디렉토리에 존재하지 않는 것입니다. 디렉토리로 이동 후 실행시켜 주십시오.
 
 # Contact
 본 프로젝트와 관련하여 궁금한 점을 이슈 리포터를 이용하여 주십시오. 만약 급한 일이나 라이선스 관련 문의일 경우 다음 이메일을 사용해 주십시오.
