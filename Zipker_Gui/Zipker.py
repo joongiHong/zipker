@@ -9,6 +9,13 @@ import os
 import time
 from itertools import permutations
 
+# 버전 호출 함수
+
+
+def version():
+    ver = "0.2.0"
+    return ver
+
 
 # 압축파일 존재 유무 함수
 
