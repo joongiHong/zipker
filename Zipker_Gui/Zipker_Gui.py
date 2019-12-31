@@ -2,7 +2,10 @@
 
 # 임포트 파트
 from PyQt5 import QtCore, QtGui, QtWidgets
-from Zipker import zip_decrypt, string
+from Zipker import zip_decrypt, string, version
+import balloon
+import time
+import datetime
 
 # 일부 변수 선언
 
@@ -11,11 +14,40 @@ opnum = 0
 user_min = 0
 user_max = 0
 string2 = []
+end_password = 0
+time_start = 0
+time_end = 0
+
+# 보고서 작성용
+
+now = datetime.datetime.now()
+now_time = str(now.year) + str(now.month) + str(now.day) + \
+    str(now.hour) + str(now.minute) + str(now.second)
+
+
+def report_write(yn, howtime, filename, end_password):
+    global zipver
+
+    report_body = "[Zipker 분석 결과 보고서]\n\n" + \
+                "■■■■■■■ Zipker 기본 정보 ■■■■■■■\n" + \
+                "버전 : V 0.1.1\n" + \
+                "엔진 버전 : " + version() + "\n" + \
+                "에디션 : 스텐더드\n\n" + \
+                "■■■■■■■ 분석 결과 보고 ■■■■■■■\n" + \
+                "분석 파일 : " + filename + "\n" + \
+                "성공 여부 : " + yn + "\n" + \
+                "비밀번호 : " + end_password + "\n" + \
+                "소요 시간 : " + str(howtime) + "초\n"
+
+    return report_body
 
 # Gui 구성 파트 (Qt 디자이너)
 
 
 class Ui_MainWindow(object):
+    def __init__(self, parent=None):
+        self.threadclass = Thread()
+
     def setupUi(self, MainWindow):
         # 폼 설정
         MainWindow.setObjectName("MainWindow")
@@ -221,11 +253,9 @@ class Ui_MainWindow(object):
                     MainWindow, "Zipker", "입력하신 것이 숫자가 아닌 것 같습니다.\n숫자 형식으로 입력하시기 바랍니다.\n\nError code: U-TYPE", QtWidgets.QMessageBox.Yes)
                 self.max.setText("")
 
-    # 파일 검색 시작
+    # 쓰레드 점프
 
     def findpassword(self):
-        global filename, user_max, user_min, string2
-
         if filename == "" or filename == 0:
             QtWidgets.QMessageBox.warning(
                 MainWindow, "Zipker", "파일이 선택되지 않았습니다.\n선택하여 주시기 바랍니다.\n\nError code: U-NOINPUT", QtWidgets.QMessageBox.Yes)
@@ -236,14 +266,44 @@ class Ui_MainWindow(object):
             QtWidgets.QMessageBox.warning(
                 MainWindow, "Zipker", "자릿수 설정이 완료되지 않았습니다.\n설정하여 주시기 바랍니다.\n\nError code: U-NOINPUT", QtWidgets.QMessageBox.Yes)
         else:
-            end_password = zip_decrypt(filename, string2, user_min, user_max)
+            self.statusbar.showMessage('대입 중...')
+            self.threadclass.start()
 
-            if end_password == False:
-                QtWidgets.QMessageBox.information(
-                    MainWindow, "Zipker", "대입 결과 비밀번호를 찾아내지 못했습니다\n문자열 설정이 잘못되었거나 미지원 파일일 수 있습니다.\n\nError code: Z-UNKNOWN", QtWidgets.QMessageBox.Yes)
-            else:
-                QtWidgets.QMessageBox.information(
-                    MainWindow, "Zipker", "대입 결과 비밀번호를 찾아내었습니다.\n본 프로그램은 압축 파일을 지원하지 않으므로 타사 프로그램으로 해제하십시오.\n\nPassword: " + end_password, QtWidgets.QMessageBox.Yes)
+# 쓰레드
+
+
+class Thread(QtCore.QThread):
+    def __init__(self, parent=None):
+        super(Thread, self).__init__(parent)
+
+    def run(self):  # 파일 검색 부분
+        global filename, user_max, user_min, string2, end_password, time_start, time_end
+
+        time_start = time.time()
+        end_password = zip_decrypt(filename, string2, user_min, user_max)
+
+        # 결과 보고 파트
+
+        if end_password != False:
+            time_end = time.time()
+            howtime = time_end - time_start
+            balloon.balloon_tip(
+                'Zipker 결과', '비밀번호를 찾았습니다\n비밀번호는 ' + end_password + ' 입니다.\n자세한 것은 Zipker 레포트에서 확인하세요.')
+            f = open(now_time + ".txt", 'w')
+            f.write(report_write("성공", howtime, filename, end_password))
+            f.close
+
+            sys.exit(app.exec_())
+        else:
+            time_end = time.time()
+            howtime = time_end - time_start
+            balloon.balloon_tip(
+                'Zipker 결과', '비밀번호를 찾지 못했습니다\n문자열 설정 등을 바꾸고 다시 시도해 보십시오.\n자세한 것은 Zipker 레포트에서 확인하세요.')
+            f = open(now_time + ".txt", 'w')
+            f.write(report_write("실패", howtime, filename, ""))
+            f.close
+
+            sys.exit(app.exec_())
 
 
 if __name__ == "__main__":
