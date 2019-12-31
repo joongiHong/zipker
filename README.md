@@ -1,7 +1,5 @@
 ![head](https://user-images.githubusercontent.com/23215270/70505338-14a48b80-1b6b-11ea-93ed-893ebb52e62a.png)
 
-[한국어](https://github.com/joongiHong/zipker/blob/master/README.md) | [English](https://github.com/joongiHong/zipker/blob/master/README.en.md)
- | [中文](https://github.com/joongiHong/zipker/blob/master/README.zh.md) | [日本語](https://github.com/joongiHong/zipker/blob/master/README.ja.md)
 <br/><br/>
 암호가 걸린 압축파일에 무차별 대입 공격을 시도하여 비밀번호를 찾아내는 프로그램입니다.<br>
 본 프로젝트는 파이썬으로 작성되었으며 라이선스는 GPL 3.0 입니다.<br>
