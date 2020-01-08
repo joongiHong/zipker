@@ -2,17 +2,17 @@
  * * * Compile_AHK SETTINGS BEGIN * * *
 
 [AHK2EXE]
-Exe_File=D:\2_개발\Zipker\배포\2.0.0\Zipker_Standard.exe
+Exe_File=D:\2_개발\Zipker\배포\2.0.1\Zipker_Standard.exe
 [VERSION]
 Set_Version_Info=1
 Company_Name=Joongi Hong (ZERO)
-File_Description=Zipker 2.0.0
-File_Version=2.0.0.0
+File_Description=Zipker 2.0.1
+File_Version=2.0.1.0
 Inc_File_Version=0
 Legal_Copyright=Copyright 2020. Joongi Hong. All rights reserved.
 Original_Filename=Zipker_Standard.exe
 Product_Name=Zipker
-Product_Version=2.0.0.0
+Product_Version=2.0.1.0
 Language_ID=79
 [ICONS]
 Icon_1=%In_Dir%\theme\icon.ico
@@ -21,8 +21,14 @@ Icon_1=%In_Dir%\theme\icon.ico
 */
 
 ; 버전 정보 선언
-version := "2.0.0"
+version := "2.0.1"
 password := 0
+
+; 윈도우 버전 확인
+IF A_OSVersion in WIN_VISTA,WIN_XP
+{
+	MsgBox, 16, Zipker %version%, 본 운영체제는 지원되지 않는 운영체제입니다.`n상위 버전으로 업그레이드 후 사용하세요.`n`n[Eoor Code : OS-%A_OSVersion%]
+}
 
 ; 로딩 전 찌끄레기 삭제
 IfExist, result.txt
@@ -124,6 +130,8 @@ Sleep, 500
 Send, %user%
 Sleep, 600
 Send, {enter}
+Sleep, 300
+WinMinimize, %A_ScriptDir%\engine.exe
 
 goto, findchang
 return
