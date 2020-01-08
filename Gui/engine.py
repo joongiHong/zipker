@@ -116,9 +116,9 @@ def zip_decrypt(filename, string, min, max):
 # 비 모듈 실행시 사용 코드
 
 if __name__ == "__main__":
-    os.system('cls')
-    filename, user_string, f_user_min_string, f_user_max_string = str(
-        input()).split(";")
+    uinput = sys.argv[1]
+    filename, user_string, f_user_min_string, f_user_max_string = uinput.split(
+        "?")
 
     string = string(user_string)
     user_min_string = int(f_user_min_string)

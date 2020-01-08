@@ -2,17 +2,17 @@
  * * * Compile_AHK SETTINGS BEGIN * * *
 
 [AHK2EXE]
-Exe_File=D:\2_개발\Zipker\배포\2.0.1\Zipker_Standard.exe
+Exe_File=D:\2_개발\Zipker\배포\2.0.2\Zipker_Standard.exe
 [VERSION]
 Set_Version_Info=1
 Company_Name=Joongi Hong (ZERO)
-File_Description=Zipker 2.0.1
-File_Version=2.0.1.0
+File_Description=Zipker 2.0.2
+File_Version=2.0.2.0
 Inc_File_Version=0
 Legal_Copyright=Copyright 2020. Joongi Hong. All rights reserved.
 Original_Filename=Zipker_Standard.exe
 Product_Name=Zipker
-Product_Version=2.0.1.0
+Product_Version=2.0.2.0
 Language_ID=79
 [ICONS]
 Icon_1=%In_Dir%\theme\icon.ico
@@ -21,7 +21,7 @@ Icon_1=%In_Dir%\theme\icon.ico
 */
 
 ; 버전 정보 선언
-version := "2.0.1"
+version := "2.0.2"
 password := 0
 
 ; 윈도우 버전 확인
@@ -123,15 +123,9 @@ else
 	user_string = 3
 }
 
-user := zipurl . ";" . user_string . ";" . user_min . ";" . user_max
+user := zipurl . "?" . user_string . "?" . user_min . "?" . user_max
 
-run, engine.exe
-Sleep, 500
-Send, %user%
-Sleep, 600
-Send, {enter}
-Sleep, 300
-WinMinimize, %A_ScriptDir%\engine.exe
+run, .\engine.exe %user%,,hide
 
 goto, findchang
 return
